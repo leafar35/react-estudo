@@ -1,0 +1,15 @@
+version: "2"
+
+services:
+
+  nodejs:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: nodejs
+    user: "node"
+    volumes:
+      - ./app/:/home/node/app
+    expose:
+      - "3000"
+    tty: true
