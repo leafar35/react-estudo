@@ -8,7 +8,8 @@ docker exec -u root -t -i container_id bash entrar como sudo!root para executar 
 
 sudo ./githubdesktop.appimage --install --no-sandbox
 
-Senha agora pra push. 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
+Senha agora pra push. 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
 
+vscode seleciona tudo que for igual repetindo o ctrl + D a cada clique ele seleciona o próximo.
 
 FIGMA.
