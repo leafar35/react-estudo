@@ -4,7 +4,7 @@ export const Container = styled.div`
 
     grid-area: AS;
     background-color: ${props => props.theme.colors.secondary};
-    padding-left: 20px
+    padding-left: 20px;
     border-radius: 1px solid ${props => props.theme.colors.gray};
     
 `;
@@ -40,7 +40,7 @@ export const MenuItemLink = styled.a`
     text-decoration: none;
     transition: opacity .3s;
     &:hover {
-        opacity: .7
+        opacity: .7;
     }
 
     > svg{
