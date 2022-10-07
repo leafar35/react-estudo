@@ -9,6 +9,7 @@ import gains from '../../repositories/gains';
 import listofmouths from '../../utils/months';
 import happyImg from '../../assets/happy.svg';
 import sadImg from '../../assets/sad.svg';
+import grining from '../../assets/grinning.svg';
 
 const Dashboard: React.FC = () => {
     const [monthSelected, setMonthSelected] = useState<number>(1);
@@ -73,6 +74,31 @@ const Dashboard: React.FC = () => {
 
     },[totalGains, totalExpense]);
 
+    const message = useMemo(() => {
+        if(totalbalance < 0){
+            return {
+                title: 'Que triste!',
+                description: 'Nesse mês, você gastou mais do que deveria.',
+                footerText: 'Verifique seus gastos e tente cortar algumas coisas desncessárias!',
+                icon: sadImg
+            }
+        }else if(totalbalance === 0){
+            return {
+                title: 'Ufa!',
+                description: 'Nesse mês ganhou exatamente o que ganhou',
+                footerText: 'Tenha cuidado, no próximo mês tente poupar o seu dinheiro.',
+                icon: grining
+            }
+        }else{
+            return {
+                title: 'Muito bem!',
+                description: 'Sua carteira está positiva',
+                footerText: 'Continue assim. considere investir seu saldo!',
+                icon: happyImg
+            }
+        }
+    },[totalbalance])
+
     return (
         <Container>
             <ContentHeader title="Dashboard" lineColor="#F7931B">
@@ -103,10 +129,10 @@ const Dashboard: React.FC = () => {
                     color="#E44C4E"
                 />
                 <MessageBox 
-                    title="Muito bem!"
-                    description="Sua carteria está posítiva!"
-                    footerText="Continue assim. Considere investir o seu saldo."
-                    icon={happyImg}
+                    title={message.title}
+                    description={message.description}
+                    footerText={message.footerText}
+                    icon={message.icon}
                 />
             </Content>
         </Container>
