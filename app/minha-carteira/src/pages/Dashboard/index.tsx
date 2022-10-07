@@ -1,10 +1,14 @@
 import React, { useState, useMemo } from 'react';
-import { Container } from './styles';
+import { Container, Content } from './styles';
 import SelectInput from '../../components/SelectInput';
 import ContentHeader from '../../components/ContentHeader';
+import WalletBox from '../../components/WalletBox';
+import MessageBox from '../../components/MessageBox';
 import expenses from '../../repositories/expenses';
 import gains from '../../repositories/gains';
 import listofmouths from '../../utils/months';
+import happyImg from '../../assets/happy.svg';
+import sadImg from '../../assets/sad.svg';
 
 const Dashboard: React.FC = () => {
     const [monthSelected, setMonthSelected] = useState<number>(1);
@@ -40,6 +44,36 @@ const Dashboard: React.FC = () => {
                 <SelectInput options={mounths} change={(e) => setMonthSelected(parseInt(e.target.value))} defaultValue={monthSelected} />
                 <SelectInput options={years} change={(e) => setYearhSelected(parseInt(e.target.value)) } defaultValue={yearSelected} />
             </ContentHeader>
+
+            <Content>
+                <WalletBox
+                    title="Saldo"
+                    amount={150.00}
+                    footerLabel="Atualizado com base nas entradas e saídas"
+                    icon="dollar"
+                    color="#4E41F0"
+                />
+                <WalletBox
+                    title="Entradas"
+                    amount={5000.00}
+                    footerLabel="Atualizado com base nas entradas e saídas"
+                    icon="arrowUp"
+                    color="#F7931B"
+                />
+                <WalletBox
+                    title="Saídas"
+                    amount={4450.00}
+                    footerLabel="Atualizado com base nas entradas e saídas"
+                    icon="arrowDown"
+                    color="#E44C4E"
+                />
+                <MessageBox 
+                    title="Muito bem!"
+                    description="Sua carteria está posítiva!"
+                    footerText="Continue assim. Considere investir o seu saldo."
+                    icon={happyImg}
+                />
+            </Content>
         </Container>
     );
 }

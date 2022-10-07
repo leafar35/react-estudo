@@ -15,3 +15,6 @@ vscode seleciona tudo que for igual repetindo o ctrl + D a cada clique ele selec
 FIGMA.
 
 Alt seta pra cima em uma linha ele vai jogando a linha pra cima no vscode.
+
+Error quando compilado.
+sudo docker-compose build --no-cache
