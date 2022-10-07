@@ -38,6 +38,41 @@ const Dashboard: React.FC = () => {
         });
     },[]);
 
+    const totalExpense = useMemo(() => {
+        let total: number = 0;
+
+        expenses.forEach(element => {
+            const date = new Date(element.date);
+            const month = date.getMonth()+1;
+            const year = date.getFullYear();
+
+            if(month === monthSelected && year === yearSelected){
+                total += Number(element.amount)
+            }
+        });
+        return total;
+    },[monthSelected, yearSelected]);
+
+    const totalGains = useMemo(() => {
+        let total: number = 0;
+
+        gains.forEach(element => {
+            const date = new Date(element.date);
+            const month = date.getMonth()+1;
+            const year = date.getFullYear();
+
+            if(month === monthSelected && year === yearSelected){
+                total += Number(element.amount)
+            }
+        });
+        return total;
+    },[monthSelected, yearSelected]);
+
+    const totalbalance = useMemo(() => {
+        return totalGains - totalExpense;
+
+    },[totalGains, totalExpense]);
+
     return (
         <Container>
             <ContentHeader title="Dashboard" lineColor="#F7931B">
@@ -48,21 +83,21 @@ const Dashboard: React.FC = () => {
             <Content>
                 <WalletBox
                     title="Saldo"
-                    amount={150.00}
+                    amount={totalbalance}
                     footerLabel="Atualizado com base nas entradas e saídas"
                     icon="dollar"
                     color="#4E41F0"
                 />
                 <WalletBox
                     title="Entradas"
-                    amount={5000.00}
+                    amount={totalGains}
                     footerLabel="Atualizado com base nas entradas e saídas"
                     icon="arrowUp"
                     color="#F7931B"
                 />
                 <WalletBox
                     title="Saídas"
-                    amount={4450.00}
+                    amount={totalExpense}
                     footerLabel="Atualizado com base nas entradas e saídas"
                     icon="arrowDown"
                     color="#E44C4E"
