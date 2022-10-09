@@ -17,7 +17,7 @@ const AppRoutes: React.FC = () => {
         <Layout>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/" element={<Dashboard />} />
                     <Route path="/list/:type" element={<List match={match} />} />
                 </Routes>
             </BrowserRouter>
