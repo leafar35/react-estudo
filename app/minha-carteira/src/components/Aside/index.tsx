@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logoImg from '../../assets/logo.svg';
-import { MdDashboard, MdArrowDownward, MdArrowUpward, MdExitToApp } from 'react-icons/md';
-import { Container, Header, LogImg, Title, MenuContainer, MenuItemLink, MenuItemButtom } from './styles';
+import { MdDashboard, MdArrowDownward, MdArrowUpward, MdExitToApp, MdClose, MdMenu } from 'react-icons/md';
+import { Container, Header, LogImg, Title, MenuContainer, MenuItemLink, MenuItemButtom, ToggleMenu, ThemeToggleFooter } from './styles';
 import { useAuth } from '../../hooks/auth';
+import { useTheme } from '../../hooks/theme';
+import Toggle from '../Toggle';
 
 const Aside: React.FC = () => {
     const { sigOuth } = useAuth();
+    const { toggleTheme, theme } = useTheme();
+    const [ toggleMenuIsOpened, setToggleMenuIsOpened ] = useState(false);
+    const [ dartkTheme, setDarkTheme ] = useState(() => theme.title === 'dark' ? true : false);
+    const handleToggleMenu = () => {
+        setToggleMenuIsOpened(!toggleMenuIsOpened);
+    }
+    const handleChangeTheme = () => {
+        setDarkTheme(!dartkTheme);
+        toggleTheme();
+    }
     return (
-        <Container>
+        <Container menuIsOpen={toggleMenuIsOpened}>
             <Header>
+                <ToggleMenu onClick={handleToggleMenu}>
+                    { toggleMenuIsOpened ? <MdClose /> : <MdMenu /> }
+                </ToggleMenu>
                 <LogImg src={logoImg} alt="Logo Minha Carteira" />
                 <Title>Minha Carteira</Title>
             </Header>
@@ -31,6 +46,16 @@ const Aside: React.FC = () => {
                     Sair
                 </MenuItemButtom>
             </MenuContainer>
+
+            <ThemeToggleFooter menuIsOpen={toggleMenuIsOpened}>
+                <Toggle 
+                    labelLeft='Light'
+                    labelRight='Dark'
+                    checked={dartkTheme}
+                    onChangeParam={handleChangeTheme}
+                />
+            </ThemeToggleFooter>
+
         </Container>
     );
 }
